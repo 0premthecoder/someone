@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>It's for u!!</title>
+
+  <style>
+    :root {
+      --bg: #0f0f12;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      height: 100vh;
+      overflow: hidden;
+      font-family: system-ui, sans-serif;
+      color: white;
+    }
+
+    /* ================= LOCK SCREEN ================= */
+    .lock-screen {
+      position: fixed;
+      inset: 0;
+      background: #0f0f12;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 1.2s ease;
+    }
+
+    .lock-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .lock-content {
+      text-align: center;
+    }
+
+    .lock-emoji {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .lock-timer {
+      font-size: 22px;
+      letter-spacing: 0.25em;
+      margin-bottom: 12px;
+    }
+
+    .lock-sub {
+      font-size: 13px;
+      opacity: 0.6;
+    }
+
+    /* ================= BALLOONS ================= */
+    .balloon {
+      position: fixed;
+      bottom: -120px;
+      width: 44px;
+      height: 60px;
+      border-radius: 50% 50% 45% 45%;
+      animation: floatUp 5s ease-in forwards;
+      z-index: 5;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      width: 2px;
+      height: 16px;
+      background: rgba(255, 255, 255, 0.5);
+      transform: translateX(-50%);
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-140vh);
+      }
+    }
+
+    .pop {
+      animation: pop 0.4s ease forwards;
+    }
+
+    @keyframes pop {
+      to {
+        transform: scale(1.6);
+        opacity: 0;
+      }
+    }
+
+    /* ================= CAKE ================= */
+    .cake-section {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .cake-section.show {
+      opacity: 1;
+      pointer-events: auto;
+      transition: opacity 1.2s ease;
+    }
+
+    .cake {
+      position: relative;
+      width: 200px;
+      cursor: pointer;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      50% {
+        transform: scale(1.03);
+      }
+    }
+
+    .layer {
+      width: 100%;
+      height: 50px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #ffb703, #fb8500);
+      margin-bottom: 6px;
+    }
+
+    .layer.top {
+      height: 40px;
+      background: linear-gradient(135deg, #ff79c6, #ff4d9d);
+    }
+
+    /* ================= CANDLES ================= */
+    .candles {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      display: flex;
+      gap: 20px;
+      transform: translateX(-50%);
+    }
+
+    .candle {
+      width: 8px;
+      height: 30px;
+      background: #eee;
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .flame {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      width: 10px;
+      height: 14px;
+      background: radial-gradient(circle, #ffd166, #ff8800);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      animation: flicker 0.8s infinite;
+    }
+
+    @keyframes flicker {
+      50% {
+        transform: translateX(-50%) scale(1.15);
+      }
+    }
+
+    /* ================= SMOKE ================= */
+    .smoke {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      background: rgba(200, 200, 200, 0.5);
+      border-radius: 50%;
+      animation: smoke 2s ease-out forwards;
+    }
+
+    @keyframes smoke {
+      to {
+        transform: translate(-50%, -60px) scale(2);
+        opacity: 0;
+      }
+    }
+
+    /* ================= TEXT ================= */
+    .instruction {
+      font-size: 14px;
+      opacity: 0.7;
+      letter-spacing: 0.08em;
+    }
+
+    /* ================= FINAL BALLOON ================= */
+    .big-balloon {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .big-balloon.show {
+      opacity: 1;
+      transition: opacity 1.2s ease;
+    }
+
+    .big-balloon img {
+      width: 220px;
+      max-width: 70vw;
+      animation: bigFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes bigFloat {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .big-text {
+      margin-top: 20px;
+      font-size: 28px;
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    /* ================= CLAP ================= */
+    .clap {
+      position: fixed;
+      font-size: 28px;
+      pointer-events: none;
+      animation: clapPop 8s ease forwards;
+    }
+
+    @keyframes clapPop {
+      0% {
+        transform: scale(0.4);
+        opacity: 0;
+      }
+
+      40% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1.6);
+        opacity: 0;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- LOCK SCREEN -->
+  <div class="lock-screen" id="lockScreen">
+    <div class="lock-content">
+      <div class="lock-emoji">🎁</div>
+      <div class="lock-timer" id="countdown"></div>
+      <div class="lock-sub" style="font-size: 30px;animation: bigFloat 1s ease-in-out infinite;">Just wait, Mitisha. It’s on the way</div>
+    </div>
+  </div>
+
+  <!-- CAKE -->
+  <div class="cake-section">
+    <div class="cake">
+      <div class="layer top"></div>
+      <div class="layer"></div>
+      <div class="layer"></div>
+      <div class="candles">
+        <div class="candle"><span class="flame"></span></div>
+        <div class="candle"><span class="flame"></span></div>
+        <div class="candle"><span class="flame"></span></div>
+      </div>
+    </div>
+    <div class="instruction">Make a wish and tap on Candles!!</div>
+  </div>
+
+  <!-- FINAL BIG BALLOON -->
+  <div class="big-balloon">
+    <img src="image.png" alt="">
+    <div class="big-text">HAPPY BIRTHDAY Mitisha!!</div>
+  </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      /* ================= IST COUNTDOWN LOCK ================= */
+      const lockScreen = document.getElementById('lockScreen');
+      const countdownEl = document.getElementById('countdown');
+      const REDIRECT_URL = "https://yt.openinapp.co/4sysy";
+
+      const INTRO_DELAY = 3000; // 3 seconds
+
+      const timer = setInterval(updateCountdown, 1000);
+
+      // IST = UTC + 5:30
+      const unlockUTC = Date.UTC(2025, 11, 22, 18, 30, 0); // 29 Dec 00:00 IST
+
+      function updateCountdown() {
+        const nowUTC = Date.now();
+        const diff = unlockUTC - nowUTC;
+
+        if (diff <= 0) {
+          clearInterval(timer);
+
+          // Keep lock screen visible for 3 seconds
+          setTimeout(() => {
+            lockScreen.classList.add('hidden');
+            startExperience();
+          }, INTRO_DELAY);
+
+          return;
+        }
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+
+        countdownEl.textContent =
+          `${String(d).padStart(2, '0')} : ${String(h).padStart(2, '0')} : ${String(m).padStart(2, '0')} : ${String(s).padStart(2, '0')}`;
+      }
+
+      updateCountdown();
+
+      /* ================= EXPERIENCE ================= */
+      function launchBalloons(count = 8) {
+        const colors = ['#ff79c6', '#8be9fd', '#ffd166', '#c77dff'];
+        for (let i = 0; i < count; i++) {
+          const b = document.createElement('div');
+          b.className = 'balloon';
+          b.style.left = Math.random() * 100 + 'vw';
+          b.style.background = colors[Math.floor(Math.random() * colors.length)];
+          document.body.appendChild(b);
+          setTimeout(() => b.classList.add('pop'), 4200 + Math.random() * 800);
+          setTimeout(() => b.remove(), 5200);
+        }
+      }
+
+
+      function clapBurst(x, y, count = 6) {
+        for (let i = 0; i < count; i++) {
+          const clap = document.createElement('div');
+          clap.className = 'clap';
+          clap.textContent = '👏';
+
+          const offsetX = (Math.random() - 0.5) * 80;
+          const offsetY = (Math.random() - 0.5) * 80;
+
+          clap.style.left = x + offsetX + 'px';
+          clap.style.top = y + offsetY + 'px';
+
+          document.body.appendChild(clap);
+
+          setTimeout(() => clap.remove(), 8000);
+        }
+      }
+
+
+      const cakeSection = document.querySelector('.cake-section');
+      const cake = document.querySelector('.cake');
+      const bigBalloon = document.querySelector('.big-balloon');
+
+      const popSound = new Audio('pop.mp3');
+      const song = new Audio('birthday.mp3');
+      song.volume = 0.45;
+
+      song.addEventListener('ended', () => {
+        setTimeout(() => {
+          alert("Happy birthday Mitisha tho real surprise is here click ok!!");
+          window.location.href = REDIRECT_URL
+        },
+          1000)
+
+      });
+
+      function startExperience() {
+        launchBalloons();
+        setTimeout(() => cakeSection.classList.add('show'), 5200);
+      }
+
+      let done = false;
+
+      cake.addEventListener('click', (e) => {
+        if (done) return;
+        done = true;
+
+        if (navigator.vibrate) navigator.vibrate([80, 40, 80]);
+
+        cake.querySelectorAll('.flame').forEach(f => f.remove());
+        popSound.play().catch(() => { });
+        clapBurst(e.clientX, e.clientY);
+
+        document.querySelectorAll('.candle').forEach(c => {
+          const s = document.createElement('div');
+          s.className = 'smoke';
+          c.appendChild(s);
+          setTimeout(() => s.remove(), 2000);
+        });
+
+        launchBalloons(10);
+        setTimeout(() => song.play().catch(() => { }), 800);
+
+        setTimeout(() => {
+          cakeSection.style.opacity = '0';
+          bigBalloon.classList.add('show');
+        }, 5000);
+      });
+
+    });
+
+
+  </script>
+
+</body>
+
+</html>
