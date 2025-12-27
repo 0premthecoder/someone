@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Quiet Timeline</title>
+
+  <!-- Retro font -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Press Start 2P', monospace;
+      color: #eaeaf0;
+      overflow-x: hidden;
+      background: linear-gradient(180deg, #020617, #0b1024, #120f2d);
+      transition: background 1s ease;
+    }
+
+    /* 🌌 STARS */
+    .stars {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(white 1px, transparent 1px);
+      background-size: 3px 3px;
+      opacity: 0.15;
+      animation: drift 60s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes drift {
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: 1000px 1000px;
+      }
+    }
+
+    /* 🌳 TREE */
+    .tree {
+      position: fixed;
+      right: -40px;
+      bottom: 0;
+      font-size: 14rem;
+      opacity: 0.15;
+      z-index: 1;
+    }
+
+    /* 🐼🐒 */
+    .panda,
+    .monkey {
+      position: fixed;
+      font-size: 2.5rem;
+      z-index: 2;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .panda {
+      right: 110px;
+      bottom: 160px;
+    }
+
+    .monkey {
+      right: 170px;
+      bottom: 200px;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    /* 📜 SECTIONS */
+    .section {
+      min-height: 100vh;
+      padding: 100px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      opacity: 0.15;
+      transform: translateY(40px);
+      transition: all 1.2s ease;
+    }
+
+    .section.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .text {
+      max-width: 600px;
+      font-size: 1rem;
+      line-height: 1.9;
+      color: #d8d8ff;
+    }
+
+    /* 👇 Scroll hint */
+    .scroll-hint {
+      position: fixed;
+      bottom: 25px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.6rem;
+      opacity: 0.6;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: .3;
+      }
+
+      50% {
+        opacity: .8;
+      }
+
+      100% {
+        opacity: .3;
+      }
+    }
+
+    .title-wrap {
+      position: relative;
+      text-align: center;
+      padding: 80px 20px 40px;
+      z-index: 3;
+    }
+
+    .title {
+      font-size: 1.1rem;
+      color: #f5d76e;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="title-wrap">
+    <div class="title">A Chapter That Happened</div>
+    <div class="subtitle">just moments, nothing more — nothing less</div>
+  </div>
+
+  <div class="stars"></div>
+  <div class="tree">🌳</div>
+  <div class="panda">🐼</div>
+  <div class="monkey">🐒</div>
+
+  <div class="scroll-hint">scroll ↓</div>
+
+  <!-- SECTIONS -->
+  <section class="section">
+    <div class="text">
+      We met on a random website.<br><br>
+      Maybe I was bored.<br>
+      Maybe I wasn’t okay.<br><br>
+      I was wandering.<br>
+      And somehow, I met you.
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="text">
+      At first, I thought it would just be a little chit-chat. <br>
+      Maybe two or three days. <br>
+      Then you’d get bored and that would be it. <br>
+      But that didn’t happen.
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="text">
+      We started talking daily.<br>
+      I still remember calling you “nanny.”<br>
+      It came out of nowhere — just a random nickname.<br><br>
+      Our talks were cringe <br>
+      But it mattered.
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="text">
+      I still remember the jokes we made,<br>
+      how we brought Bhagwan ji into our talks.<br>
+      vads and all lol!!<br>
+      You understood me.<br>
+  </div>
+</section>
+<section class="section">
+  <div class="text">
+      And yeah, that panda hovering here<br>
+      when you asked me which animal you were<br> and <br>said you were a panda,
+      <br>
+      that just stayed with me. <br>
+      So now you’re here, floating on the screen.
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="text">
+      Then things slowly changed.<br>
+      I could feel it in the texts.<br>
+      The tone shifted.<br>
+      Something wasn’t right.
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="text">
+      That’s when I sent that message — out of nowhere.<br>
+      Even though we were talking, <br> I didn’t feel like you were really there<br>
+      <br>You weren’t getting your favorite college.<br>
+      I was feeling lonely.<br>
+      so it just happend <br>
+      I brought up that candle thing. <br>
+      And I meant every word of it.
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="text">
+      I thought maybe it would turn into something<br>
+      maybe we’d fight,<br>maybe something would change.<br>
+      But it didn’t go that way.<br>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="text">
+      You opened up instead.<br>
+      You said you needed space.<br>
+      And suddenly, things felt different.<br>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="text">
+      The cringe rush was gone.<br>
+      It felt like we had grown up.<br>
+      from being chaotic kids.<br>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="text">
+      I was trying to get us back on track.<br>
+      but time started getting tighter.<br>
+      like, one time i even texted <br>
+      why we grown up<br>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="text">
+      I didn’t want to become a burden.<br>
+      And slowly<br>
+      I could see myself getting better. <br>
+      And suddenly, things felt different.<br>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="text">
+      At the same time.<br>
+      you were choosing yourself too.<br>
+      You decided to go with the flow.<br>
+      You took admission into college. <br>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="text">
+      I noticed.<br>
+      how we both stopped complaining.<br>
+      so much about life..<br>
+    </div>
+  </section>
+  <section class="section">
+    <div class="text">
+      My focus shifted to academics.<br>
+      but we still talked.<br>
+      Time just started flying.<br>
+    </div>
+  </section>
+  <section class="section">
+    <div class="text">
+      It was like a small nod.<br>
+      we gave each other.<br>
+      and somehow that meant a lot..<br>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="text">
+      and that small reassurance. <br>
+      you gave me that day.<br>
+      made me feel so much lighter.<br>
+      It wasn’t one big moment that mattered.<br>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="text">
+      It was all the small things. <br>
+      The talks.<br>
+      The belief. <br>
+      The little jokes. <br>
+      The small nods. <br>
+
+      That’s what mattered most.
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="text">
+      And today, it’s your day.<br>
+      I just wanted you to know.<br>
+      you made my year. <br>
+      You’ve earned my reverence. <br>
+    </div>
+  </section>
+  <section class="section">
+    <div class="text">
+      I know it sounds a little dramatic. <br>
+      but it’s your first birthday with me, <br>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="text">
+      I know I’m not there. <br>
+      But you’ve called me “monkey”<br>
+       so many times… <br>
+       So here’s that little monkey, still here. 🙈 <br>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="text">
+    Happy Birthday.<br>
+    From the monkey 🐒 to the panda 🐼
+  </div>
+  </section>
+
+  <script>
+    const sections = document.querySelectorAll('.section');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.4 });
+
+    sections.forEach(sec => observer.observe(sec));
+  </script>
+
+</body>
+
+</html>
